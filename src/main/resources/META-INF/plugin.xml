@@ -1,57 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?><!--
- The MIT License (MIT)
-
- Copyright (c) 2017-2019 Chathura Buddhika
-
- Permission is hereby granted, free of charge, to any person obtaining a copy
- of this software and associated documentation files (the "Software"), to deal
- in the Software without restriction, including without limitation the rights
- to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
- copies of the Software, and to permit persons to whom the Software is
- furnished to do so, subject to the following conditions:
-
- The above copyright notice and this permission notice shall be included
- in all copies or substantial portions of the Software.
-
- THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
- IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
- FITNESS FOR A PARTICULAR PURPOSE AND NON-INFRINGEMENT. IN NO EVENT SHALL THE
- AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
- LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
- OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
- SOFTWARE.
--->
-<idea-plugin url="https://github.com/chathurabuddi/intellij-jasper-report-support">
-	<id>lk.chathurabuddi.jasper-report-support</id>
+  ~ Project intellij-jasper-report-support
+  ~
+  ~ Copyright 2023-2023 Alessandro 'kLeZ' Accardo
+  ~ Previous copyright (c) 2017-2023 Chathura Buddhika
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+<idea-plugin url="https://github.com/kLeZ/intellij-jasper-report-support">
+	<id>me.klez.jasper-report-support</id>
 	<name>Jasper Report Support</name>
 	<version>1.0.3</version>
-	<vendor email="chathu.buddi@gmail.com" url="http://www.chathurabuddi.lk">chathurabuddi</vendor>
-	<description><![CDATA[
-    This plugin will enable Jasper Report support within Intellij Idea.<br>
-    ]]></description>
-	<change-notes><![CDATA[
-      Release 1.0.2: v1.0.2<br>
-      - Added support for Intellij 2020.1<br>
-      <br>
-      Release 1.0.1: v1.0.1<br>
-      - Added support for Intellij 2019.3<br>
-      - Minor issues fixed<br>
-      <br>
-      Release 1.0.0: Initial release.<br>
-      - Enable syntax highlighting and code suggestion for jrxml files
-    ]]>
-	</change-notes>
+	<vendor email="klez@pm.me" url="https://klez.me">kLeZ</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<depends>com.intellij.modules.lang</depends>
 	<extensions defaultExtensionNs="com.intellij">
-		<fileType name="Jasper source file" implementationClass="lk.chathurabuddi.file.type.jrxml.JrxmlFileType" fieldName="INSTANCE" language="XML" extensions="jrxml" />
-		<lang.parserDefinition language="Jrxml" implementationClass="lk.chathurabuddi.lang.jrxml.JrxmlParserDefinition" />
-		<xml.schemaProvider implementation="lk.chathurabuddi.lang.jrxml.autocomplete.JrxmlSchemaProvider" />
+		<fileType name="Jasper source file" implementationClass="me.klez.file.type.jrxml.JrxmlFileType" fieldName="INSTANCE" language="XML" extensions="jrxml" />
+		<lang.parserDefinition language="Jrxml" implementationClass="me.klez.lang.jrxml.JrxmlParserDefinition" />
+		<xml.schemaProvider implementation="me.klez.lang.jrxml.autocomplete.JrxmlSchemaProvider" />
 		<notificationGroup id="Jasper Report Support Notification Group" displayType="BALLOON" />
 	</extensions>
 	<actions>
-		<action id="lk.chathurabuddi.actions.CompileJrxmlAction"
-		        class="lk.chathurabuddi.actions.CompileJrxmlAction"
+		<action id="me.klez.actions.CompileJrxmlAction"
+		        class="me.klez.actions.CompileJrxmlAction"
 		        text="Compile JR XML File"
 		        description="This action compiles the selected .jrxml file into a .jasper binary file, in the same folder of the source file">
 			<add-to-group group-id="BuildMenu" anchor="last" />

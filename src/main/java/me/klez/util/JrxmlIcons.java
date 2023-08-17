@@ -23,5 +23,16 @@
  * SOFTWARE.
  *
  */
+package me.klez.util;
 
-rootProject.name = "intellij-jasper-report-support"
+import com.intellij.openapi.util.IconLoader;
+
+import javax.swing.*;
+
+public class JrxmlIcons {
+	public static final Icon FILE = IconLoader.getIcon("/me/klez/icons/jrxml.png", JrxmlIcons.class.getClassLoader());
+
+	private JrxmlIcons() {
+		throw new IllegalStateException("Cannot initialize JrxmlIcons");
+	}
+}

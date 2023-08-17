@@ -1168,6 +1168,7 @@
         <complexType>
             <sequence>
                 <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+                <element ref="jr:propertyExpression" minOccurs="0" maxOccurs="unbounded"/>
                 <element ref="jr:scriptletDescription" minOccurs="0" maxOccurs="1"/>
             </sequence>
             <attribute name="name" type="string" use="required"/>
@@ -1390,6 +1391,11 @@
                         <enumeration value="Group">
                             <annotation>
                                 <documentation>Variable is initialized when the group specified by the <code>resetGroup</code> attribute changes.</documentation>
+                            </annotation>
+                        </enumeration>
+                        <enumeration value="Master">
+                            <annotation>
+                                <documentation>Used internally for certain built-in variables.</documentation>
                             </annotation>
                         </enumeration>
                     </restriction>
@@ -1989,6 +1995,7 @@
         <complexType>
             <sequence>
                 <element ref="jr:property" minOccurs="0" maxOccurs="unbounded"/>
+                <element ref="jr:propertyExpression" minOccurs="0" maxOccurs="unbounded"/>
                 <element ref="jr:printWhenExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:partNameExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:partComponent"/>
@@ -2461,6 +2468,7 @@
                 <element ref="jr:graphicElement" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:imageExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:anchorNameExpression" minOccurs="0" maxOccurs="1"/>
+                <element ref="jr:bookmarkLevelExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkReferenceExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkWhenExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkAnchorExpression" minOccurs="0" maxOccurs="1"/>
@@ -2506,10 +2514,39 @@
                         </enumeration>
                         <enumeration value="RealSize">
                             <annotation>
-                                <documentation>A scale image type that stretches the images height in the same way as <code>RealHeight</code>, and in addition it changes the image width to the actual with of the image.
+                                <documentation>A scale image type that stretches the images height in the same way as <code>RealHeight</code>, and in addition it reduces the image width to the actual width of the image.
 
                                     This can be useful when, for instance, a border has to be drawn around the image, respecting its actual size.
                                 </documentation>
+                            </annotation>
+                        </enumeration>
+                    </restriction>
+                </simpleType>
+            </attribute>
+            <attribute name="rotation" use="optional">
+                <annotation>
+                    <documentation>Type of rotation for the image object.</documentation>
+                </annotation>
+                <simpleType>
+                    <restriction base="string">
+                        <enumeration value="None">
+                            <annotation>
+                                <documentation>Image is not rotated.</documentation>
+                            </annotation>
+                        </enumeration>
+                        <enumeration value="Left">
+                            <annotation>
+                                <documentation>Image is rotated 90 degrees counter clockwise.</documentation>
+                            </annotation>
+                        </enumeration>
+                        <enumeration value="Right">
+                            <annotation>
+                                <documentation>Image is rotated 90 degrees clockwise.</documentation>
+                            </annotation>
+                        </enumeration>
+                        <enumeration value="UpsideDown">
+                            <annotation>
+                                <documentation>Image is rotated 180 degrees.</documentation>
                             </annotation>
                         </enumeration>
                     </restriction>
@@ -3145,6 +3182,14 @@
         </complexType>
     </element>
 
+    <element name="bookmarkLevelExpression">
+        <annotation>
+            <documentation>If specified, it will supply the bookmark level for the corresponding element. This setting overrides the bookmarkLevel attribute of the element.</documentation>
+        </annotation>
+        <complexType mixed="true">
+        </complexType>
+    </element>
+
     <element name="anchorNameExpression">
         <annotation>
             <documentation>If specified, it will supply the name of the local anchor that will mark to the corresponding element.</documentation>
@@ -3534,6 +3579,7 @@
                 <element ref="jr:textFieldExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:patternExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:anchorNameExpression" minOccurs="0" maxOccurs="1"/>
+                <element ref="jr:bookmarkLevelExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkReferenceExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkWhenExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkAnchorExpression" minOccurs="0" maxOccurs="1"/>
@@ -3541,13 +3587,11 @@
                 <element ref="jr:hyperlinkTooltipExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkParameter" minOccurs="0" maxOccurs="unbounded"/>
             </sequence>
-            <attribute name="isStretchWithOverflow" use="optional" default="false">
+            <attribute name="isStretchWithOverflow" use="optional">
                 <annotation>
-                    <documentation>
-			    <i>Deprecated</i>. Replaced by attribute <a href="#textField_textAdjust">textAdjust</a>.
-			    <p/>
-			    Instructs the report engine to allow the text field to stretch downwards in order to display all its text when it doesn't fit in the defined text field height.
-		    </documentation>
+                    <documentation><i>Deprecated</i>. Replaced by attribute <a href="#textField_textAdjust">textAdjust</a>.
+                        <p/>
+                        Instructs the report engine to allow the text field to stretch downwards in order to display all its text when it doesn't fit in the defined text field height.</documentation>
                 </annotation>
                 <simpleType>
                     <restriction base="string">
@@ -3566,34 +3610,31 @@
             </attribute>
             <attribute name="textAdjust" use="optional">
                 <annotation>
-                    <documentation>
-			    Instructs the report engine to allow the text field to stretch downwards in order to display all its text when it doesn't fit in the defined text field height.
-			    Also can scale down the font size in order for the text content to fit the design size of the text field element
-                    </documentation>
+                    <documentation>Text adjust type.</documentation>
                 </annotation>
                 <simpleType>
                     <restriction base="string">
                         <enumeration value="CutText">
                             <annotation>
-                                <documentation>
-                                    The text is cut, if it does not fit the text field element size.
-                                </documentation>
+                                <documentation>The text is cut, if it does not fit the text field element size.</documentation>
                             </annotation>
                         </enumeration>
                         <enumeration value="StretchHeight">
                             <annotation>
-                                <documentation>
-                                    The text field element is stretched in height to accommodate the entire content.
+                                <documentation>The text field element is stretched in height to accommodate the entire content.
+                                    <br/>
+                                    <b>Note:</b> Text fields with delayed evaluation do not stretch to acquire all the expression's content. This is because the
+                                    text element height is calculated when the report section is generated, and even if the engine comes back later with the text
+                                    content of the text field, the element height will not adapt, because this would ruin the already created layout.
                                 </documentation>
                             </annotation>
                         </enumeration>
                         <enumeration value="ScaleFont">
                             <annotation>
-                                <documentation>
-                                    The font size of the text is scaled down so that the entire content fits the text field element size.
+                                <documentation>The font size of the text is scaled down so that the entire content fits the text field element size.
                                     <p/>
-                                    Font size is scaled down using decreasing font size increments/decrements, until the best fit is found. The minimum font size increment/decrement amount is configured using the
-                                    <a href="http://jasperreports.sourceforge.net/api/net/sf/jasperreports/engine/fill/JRFillTextElement.html#PROPERTY_SCALE_FONT_STEP_LIMIT">net.sf.jasperreports.scale.font.step.limit</a>
+                                    Font size is scaled down using decreasing font size increments/decrements, until the best fit is found. The minimum font size increment/decrement amount
+                                    is configured using the <a href="http://jasperreports.sourceforge.net/api/net/sf/jasperreports/engine/fill/JRFillTextElement.html#PROPERTY_SCALE_FONT_STEP_LIMIT">net.sf.jasperreports.scale.font.step.limit</a>
                                     property, which also serves as minimum acceptable font size.
                                 </documentation>
                             </annotation>
@@ -3978,6 +4019,7 @@
                 <element ref="jr:chartSubtitle" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:chartLegend" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:anchorNameExpression" minOccurs="0" maxOccurs="1"/>
+                <element ref="jr:bookmarkLevelExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkReferenceExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkWhenExpression" minOccurs="0" maxOccurs="1"/>
                 <element ref="jr:hyperlinkAnchorExpression" minOccurs="0" maxOccurs="1"/>
