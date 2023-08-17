@@ -17,6 +17,11 @@ jobs:
       contents: write
       pull-requests: write
     steps:
+      - name: Free Disk Space (Ubuntu)
+        uses: jlumbroso/free-disk-space@main
+        with:
+          tool-cache: true
+          large-packages: false
 
       # Check out current repository
       - name: Fetch Sources
