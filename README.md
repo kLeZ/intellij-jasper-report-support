@@ -1,6 +1,11 @@
 ## Intellij Jasper Report Support plugin
+
+![Build](https://github.com/kLeZ/intellij-jasper-report-support/workflows/Build/badge.svg)
+[![Version](https://img.shields.io/jetbrains/plugin/v/22531.svg)](https://plugins.jetbrains.com/plugin/22531)
+[![Downloads](https://img.shields.io/jetbrains/plugin/d/22531.svg)](https://plugins.jetbrains.com/plugin/22531)
+
 <!-- Plugin description -->
-This plugin enable jasper reports viewing and compiling support for Intellij Idea IDE.    
+This plugin enables jasper reports viewing and compiling support for Intellij Idea IDE.
 <!-- Plugin description end -->
 
 ### Installation & Usage 
@@ -16,20 +21,14 @@ Clone the repository and run `buildPlugin` gradle task in project root. After th
     gradle buildPlugin
     ```
 
-### Issues
-Please make sure to read the 
-[issue reporting checklist](https://github.com/kLeZ/intellij-jasper-report-support/blob/master/CONTRIBUTING.md#issue-reporting-guidelines) 
-before opening an issue. Issues not conforming to the guidelines may be closed immediately.
-
 ### Changelog
+
 Detailed changes for each release are documented in the [release notes](https://github.com/kLeZ/intellij-jasper-report-support/releases).
 
 ### Contribution
 Contributions, issues and feature requests are welcome. Feel free to check 
-[issues page](https://github.com/kLeZ/intellij-jasper-report-support/issues) 
-if you want to contribute. Please make sure to read the 
-[contributing guide](https://github.com/kLeZ/intellij-jasper-report-support/blob/master/CONTRIBUTING.md) 
-before making a pull request.
+[issues page](https://github.com/kLeZ/intellij-jasper-report-support/issues)
+if you want to contribute.
 
 ### License
 Copyright © 2023 Alessandro 'kLeZ' Accardo ([kLeZ](https://klez.me))  

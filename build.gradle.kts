@@ -26,6 +26,7 @@
 
 import org.jetbrains.changelog.Changelog
 import org.jetbrains.changelog.markdownToHTML
+import java.nio.charset.StandardCharsets
 
 fun properties(key: String) = providers.gradleProperty(key)
 fun environment(key: String) = providers.environmentVariable(key)
@@ -145,8 +146,10 @@ tasks {
     }
 
     signPlugin {
-        certificateChain = environment("CERTIFICATE_CHAIN")
-        privateKey = environment("PRIVATE_KEY")
+        val certChain = environment("CERTIFICATE_CHAIN").get()
+        val privKey = environment("PRIVATE_KEY").get()
+        certificateChain = if (file(certChain).exists()) file(certChain).readText(StandardCharsets.UTF_8) else certChain
+        privateKey = if (file(privKey).exists()) file(privKey).readText(StandardCharsets.UTF_8) else privKey
         password = environment("PRIVATE_KEY_PASSWORD")
     }
 
