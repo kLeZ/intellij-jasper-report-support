@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## [1.0.4] - 2023-08-24
 - Added badges and description to the plugin publish workflow
 - Added sign certificate variables retrieving logic providing the ability to publish either from a plain text of from an absolute path.
 - Polishing
@@ -24,8 +25,8 @@
 ## [1.0.0] - 2019-10-09
 - Enable syntax highlighting and code suggestion for jrxml files
 
-[Unreleased]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.3...HEAD
-
+[Unreleased]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.4...HEAD
+[1.0.4]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.1...v1.0.2
 [1.0.1]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.0...v1.0.1
