@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+- Added Jasper file extension icon
+- Added more detailed description for the plugin
+- Added plugin icon
+
 ## [1.0.4] - 2023-08-24
 - Added badges and description to the plugin publish workflow
 - Added sign certificate variables retrieving logic providing the ability to publish either from a plain text of from an absolute path.
