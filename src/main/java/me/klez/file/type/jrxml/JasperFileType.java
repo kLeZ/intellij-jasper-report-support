@@ -23,17 +23,44 @@
  * SOFTWARE.
  *
  */
-package me.klez.util;
+package me.klez.file.type.jrxml;
 
-import com.intellij.openapi.util.IconLoader;
+import com.intellij.lang.Language;
+import com.intellij.openapi.fileTypes.LanguageFileType;
+import me.klez.util.JrxmlIcons;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 import javax.swing.*;
 
-public class JrxmlIcons {
-	public static final Icon JRXML = IconLoader.getIcon("/me/klez/icons/jrxml.png", JrxmlIcons.class.getClassLoader());
-	public static final Icon JASPER = IconLoader.getIcon("/me/klez/icons/jasper.png", JrxmlIcons.class.getClassLoader());
+public class JasperFileType extends LanguageFileType {
+	public static final JasperFileType INSTANCE = new JasperFileType();
 
-	private JrxmlIcons() {
-		throw new IllegalStateException("Cannot initialize JrxmlIcons");
+	private JasperFileType() {
+		super(Language.ANY);
+	}
+
+	@NotNull
+	@Override
+	public String getName() {
+		return "Jasper binary file";
+	}
+
+	@NotNull
+	@Override
+	public String getDescription() {
+		return "Jasper report binary file, the compiled version of the associated jrxml file";
+	}
+
+	@NotNull
+	@Override
+	public String getDefaultExtension() {
+		return "jasper";
+	}
+
+	@Nullable
+	@Override
+	public Icon getIcon() {
+		return JrxmlIcons.JASPER;
 	}
 }

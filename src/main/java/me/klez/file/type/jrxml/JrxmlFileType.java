@@ -61,6 +61,6 @@ public class JrxmlFileType extends LanguageFileType {
 	@Nullable
 	@Override
 	public Icon getIcon() {
-		return JrxmlIcons.FILE;
+		return JrxmlIcons.JRXML;
 	}
 }

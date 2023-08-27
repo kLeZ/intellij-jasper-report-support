@@ -32,6 +32,7 @@
 	<depends>com.intellij.modules.lang</depends>
 	<extensions defaultExtensionNs="com.intellij">
 		<fileType name="Jasper source file" implementationClass="me.klez.file.type.jrxml.JrxmlFileType" fieldName="INSTANCE" language="XML" extensions="jrxml" />
+		<fileType name="Jasper binary file" implementationClass="me.klez.file.type.jrxml.JasperFileType" fieldName="INSTANCE" language="" extensions="jasper" />
 		<lang.parserDefinition language="Jrxml" implementationClass="me.klez.lang.jrxml.JrxmlParserDefinition" />
 		<xml.schemaProvider implementation="me.klez.lang.jrxml.autocomplete.JrxmlSchemaProvider" />
 		<notificationGroup id="Jasper Report Support Notification Group" displayType="BALLOON" />
