@@ -2,6 +2,7 @@
 
 ## [Unreleased]
 
+## [1.0.5] - 2023-08-28
 - Added Jasper file extension icon
 - Added more detailed description for the plugin
 - Added plugin icon
@@ -29,7 +30,8 @@
 ## [1.0.0] - 2019-10-09
 - Enable syntax highlighting and code suggestion for jrxml files
 
-[Unreleased]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.4...HEAD
+[Unreleased]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.5...HEAD
+[1.0.5]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.4...v1.0.5
 [1.0.4]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.3...v1.0.4
 [1.0.3]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.2...v1.0.3
 [1.0.2]: https://github.com/kLeZ/intellij-jasper-report-support/compare/v1.0.1...v1.0.2
