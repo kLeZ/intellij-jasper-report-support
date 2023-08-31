@@ -27,7 +27,7 @@
 	<id>me.klez.jasper-report-support</id>
 	<name>Jasper Report Support</name>
 	<version>1.0.3</version>
-	<vendor email="klez@pm.me" url="https://klez.me">kLeZ</vendor>
+	<vendor email="klez@protonmail.com" url="https://klez.me">Alessandro 'kLeZ' Accardo</vendor>
 	<depends>com.intellij.modules.platform</depends>
 	<depends>com.intellij.modules.lang</depends>
 	<extensions defaultExtensionNs="com.intellij">
