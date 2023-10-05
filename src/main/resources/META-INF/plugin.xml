@@ -31,9 +31,9 @@
 	<depends>com.intellij.modules.platform</depends>
 	<depends>com.intellij.modules.lang</depends>
 	<extensions defaultExtensionNs="com.intellij">
-		<fileType name="Jasper source file" implementationClass="me.klez.file.type.jrxml.JrxmlFileType" fieldName="INSTANCE" language="XML" extensions="jrxml" />
-		<fileType name="Jasper binary file" implementationClass="me.klez.file.type.jrxml.JasperFileType" fieldName="INSTANCE" language="" extensions="jasper" />
 		<lang.parserDefinition language="Jrxml" implementationClass="me.klez.lang.jrxml.JrxmlParserDefinition" />
+		<fileType name="Jasper source file" implementationClass="me.klez.file.type.jrxml.JrxmlFileType" fieldName="INSTANCE" language="Jrxml" extensions="jrxml" />
+		<fileType name="Jasper binary file" implementationClass="me.klez.file.type.jrxml.JasperFileType" fieldName="INSTANCE" language="" extensions="jasper" />
 		<xml.schemaProvider implementation="me.klez.lang.jrxml.autocomplete.JrxmlSchemaProvider" />
 		<notificationGroup id="Jasper Report Support Notification Group" displayType="BALLOON" />
 	</extensions>
@@ -42,7 +42,7 @@
 		        class="me.klez.actions.CompileJrxmlAction"
 		        text="Compile JR XML File"
 		        description="This action compiles the selected .jrxml file into a .jasper binary file, in the same folder of the source file">
-			<add-to-group group-id="BuildMenu" anchor="last" />
+			<add-to-group group-id="BuildMenu" anchor="first" />
 		</action>
 	</actions>
 </idea-plugin>

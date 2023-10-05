@@ -25,11 +25,12 @@
  */
 package me.klez.lang.jrxml;
 
-import com.intellij.lang.Language;
-import com.intellij.lang.xml.XMLLanguage;
+import com.intellij.lang.CompositeLanguage;
 
-public class JrxmlLanguage extends XMLLanguage {
+public class JrxmlLanguage extends CompositeLanguage {
+	public static final JrxmlLanguage INSTANCE = new JrxmlLanguage();
+
 	private JrxmlLanguage() {
-		super(Language.ANY, "Jrxml", "application/xml", "text/xml");
+		super("Jrxml", "application/xml", "text/xml");
 	}
 }
