@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Project intellij-jasper-report-support
+  ~
+  ~ Copyright 2023-2023 Alessandro 'kLeZ' Accardo
+  ~ Previous copyright (c) 2017-2023 Chathura Buddhika
+  ~
+  ~ Permission is hereby granted, free of charge, to any person obtaining a copy
+  ~ of this software and associated documentation files (the "Software"), to deal
+  ~ in the Software without restriction, including without limitation the rights
+  ~ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+  ~ copies of the Software, and to permit persons to whom the Software is
+  ~ furnished to do so, subject to the following conditions:
+  ~
+  ~ The above copyright notice and this permission notice shall be included in all
+  ~ copies or substantial portions of the Software.
+  ~
+  ~ THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+  ~ IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+  ~ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+  ~ AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+  ~ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+  ~ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+  ~ SOFTWARE.
+  ~
+  -->
+
+<schema xmlns:jr="http://jasperreports.sourceforge.net/jasperreports"
+        xmlns="http://www.w3.org/2001/XMLSchema"
+        targetNamespace="http://jasperreports.sourceforge.net/jasperreports/parts"
+        elementFormDefault="qualified">
+	<import namespace="http://jasperreports.sourceforge.net/jasperreports" />
+	<element name="subreportPart" substitutionGroup="jr:partComponent">
+		<complexType>
+			<complexContent>
+				<extension base="jr:partComponentType">
+					<sequence>
+						<element ref="jr:parametersMapExpression" minOccurs="0" maxOccurs="1" />
+						<element ref="jr:subreportParameter" minOccurs="0" maxOccurs="unbounded" />
+						<element ref="jr:returnValue" minOccurs="0" maxOccurs="unbounded" />
+						<element ref="jr:subreportExpression" minOccurs="0" maxOccurs="1" />
+					</sequence>
+					<attribute name="usingCache" type="boolean" use="optional">
+						<annotation>
+							<documentation>If true, tells the report engine to cache the report definition objects that are loaded from the same location.</documentation>
+						</annotation>
+					</attribute>
+				</extension>
+			</complexContent>
+		</complexType>
+	</element>
+</schema>

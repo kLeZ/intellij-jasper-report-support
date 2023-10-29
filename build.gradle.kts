@@ -33,11 +33,19 @@ fun environment(key: String) = providers.environmentVariable(key)
 
 plugins {
     id("java") // Java support
+    id("idea") // Idea support
     alias(libs.plugins.kotlin) // Kotlin support
     alias(libs.plugins.gradleIntelliJPlugin) // Gradle IntelliJ Plugin
     alias(libs.plugins.changelog) // Gradle Changelog Plugin
     alias(libs.plugins.qodana) // Gradle Qodana Plugin
     alias(libs.plugins.kover) // Gradle Kover Plugin
+}
+
+idea {
+    module {
+        isDownloadJavadoc = true
+        isDownloadSources = true
+    }
 }
 
 group = properties("pluginGroup").get()
@@ -53,7 +61,7 @@ repositories {
 
 // Dependencies are managed with Gradle version catalog - read more: https://docs.gradle.org/current/userguide/platforms.html#sub:version-catalog
 dependencies {
-    implementation("net.sf.jasperreports:jasperreports:6.20.5")
+    implementation("net.sf.jasperreports:jasperreports:6.20.6")
     testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
@@ -104,6 +112,11 @@ tasks {
         gradleVersion = properties("gradleVersion").get()
     }
 
+    runIde {
+        systemProperty("idea.log.trace.categories", "#me.klez")
+        systemProperty("idea.log.debug.categories", "#me.klez")
+    }
+
     patchPluginXml {
         version = properties("pluginVersion")
         sinceBuild = properties("pluginSinceBuild")
@@ -143,6 +156,8 @@ tasks {
         systemProperty("ide.mac.message.dialogs.as.sheets", "false")
         systemProperty("jb.privacy.policy.text", "<!--999.999-->")
         systemProperty("jb.consents.confirmation.enabled", "false")
+        systemProperty("idea.log.trace.categories", "#me.klez")
+        systemProperty("idea.log.debug.categories", "#me.klez")
     }
 
     signPlugin {

@@ -29,13 +29,25 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
+import org.apache.commons.io.IOUtils;
+import org.apache.commons.io.LineIterator;
+import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 
-public class JrxmlFileTypeFactory {
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Optional;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+public class JrxmlFileTypeFactory {
+	@NonNls public static final String JRXML_VERSION = "6.20.6";
 	@NonNls public static final String JRXML_EXTENSION = "jrxml";
+	@NonNls public static final String VERSION_PLACEHOLDER_TEXT = "JasperReports";
 	@NonNls static final String DOT_JRXML_EXTENSION = "." + JRXML_EXTENSION;
+	@NonNls private static final Pattern VERSION_PATTERN = Pattern.compile("\\d+\\.\\d+\\.\\d+");
 
 	public static boolean isJrxml(@NotNull PsiFile file) {
 		final VirtualFile virtualFile = file.getViewProvider().getVirtualFile();
@@ -50,6 +62,41 @@ public class JrxmlFileTypeFactory {
 			}
 		}
 		return false;
+	}
+
+	public static String getJrxmlVersion(@NotNull PsiFile file) {
+		final VirtualFile virtualFile = file.getViewProvider().getVirtualFile();
+		return getJrxmlVersion(virtualFile);
+	}
+
+	public static String getJrxmlVersion(@NotNull VirtualFile virtualFile) {
+		if (JRXML_EXTENSION.equals(virtualFile.getExtension())) {
+			final FileType fileType = virtualFile.getFileType();
+			if (fileType == getFileType() && !fileType.isBinary()) {
+				return readVersion(virtualFile).orElse(JRXML_VERSION);
+			}
+		}
+		return JRXML_VERSION;
+	}
+
+	private static Optional<String> readVersion(@NotNull VirtualFile virtualFile) {
+		String version = null;
+		try (InputStream inputStream = virtualFile.getInputStream()) {
+			LineIterator result = IOUtils.lineIterator(inputStream, StandardCharsets.UTF_8);
+			int linesScanned = 0;
+			while (result.hasNext() && version == null && linesScanned++ < 10) {
+				String line = result.next();
+				if (line.contains(VERSION_PLACEHOLDER_TEXT)) {
+					String versionLine = StringUtils.substringAfter(line, VERSION_PLACEHOLDER_TEXT);
+					Matcher matcher = VERSION_PATTERN.matcher(versionLine);
+					if (matcher.find()) {
+						version = matcher.group();
+					}
+				}
+			}
+		} catch (IOException ignored) {
+		}
+		return Optional.ofNullable(version);
 	}
 
 	@NotNull
